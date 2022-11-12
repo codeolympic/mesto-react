@@ -51,9 +51,9 @@ function Main(props) {
       </section>
       <section className="places" aria-label="Места">
         <ul className="cards">
-          {cards.map((cardData, index) => {
+          {cards.map((cardData) => {
             return (
-              <Card key={index} userId={userId} onCardClick={props.onCardClick} {...cardData} />
+              <Card key={cardData._id} userId={userId} onCardClick={props.onCardClick} {...cardData} />
             );
           })}
         </ul>

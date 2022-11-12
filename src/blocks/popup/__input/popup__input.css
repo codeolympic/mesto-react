@@ -10,3 +10,13 @@
   margin: 0 auto;
   padding: 0 0 8px;
 }
+
+.popup__input:first-of-type {
+  margin-top: 47px;
+}
+
+@media screen and (max-width: 600px) {
+  .popup__input:first-of-type {
+    margin-top: 75px;
+  }
+}
