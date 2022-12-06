@@ -45,36 +45,33 @@ function App() {
     api.saveUserInfo(userInfo)
       .then((data) => {
         setCurrentUser(data);
+        closeAllPopups();
       })
       .catch((err) => {
         console.log(`Ошибка: ${err.status}`);
       });
-
-    closeAllPopups();
   }
 
   function handleUpdateAvatar(avatarInfo) {
     api.saveAvatar(avatarInfo)
       .then((data) => {
         setCurrentUser(data);
+        closeAllPopups();
       })
       .catch((err) => {
         console.log(`Ошибка: ${err.status}`);
       });
-
-    closeAllPopups();
   }
 
   function handleAddPlaceSubmit(cardInfo) {
     api.addNewCard(cardInfo)
       .then((data) => {
         setCards([data, ...cards]);
+        closeAllPopups();
       })
       .catch((err) => {
         console.log(`Ошибка: ${err.status}`);
       });
-
-      closeAllPopups();
   }
 
   function handleCardLike(card) {
@@ -83,17 +80,20 @@ function App() {
     api.changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
         setCards((cards) => cards.map((c) => c._id === card._id ? newCard : c));
-      }
-    );
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err.status}`);
+      });
   }
 
   function handleCardDelete(card) {
     api.deleteCard(card._id)
+      .then(() => {
+        setCards((cards) => cards.filter((c) => c._id !== card._id));
+      })
       .catch((err) => {
         console.log(`Ошибка: ${err.status}`);
       });
-
-    setCards((cards) => cards.filter((c) => c._id !== card._id));
   }
 
   React.useEffect(() => {
